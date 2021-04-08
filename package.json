@@ -1,6 +1,6 @@
 {
   "name": "clean-before-html-webpack-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "> 在html-webpack-plugin处理前，清理html里一些不必要的内容，如dev-server时引入的脚本",
   "keywords": [
     "clean-before-html-webpack-plugin"
