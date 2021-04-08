@@ -1,4 +1,5 @@
 module.exports = {
+  files: './src/**/*',
   arrowParens: 'avoid', // 只有一个参数的箭头函数不带圆括号(默认avoid不带)
   bracketSpacing: true, //花括号前后空格
   jsxBracketSameLine: true, //使多行JSX元素最后一行末尾的 > 单独一行

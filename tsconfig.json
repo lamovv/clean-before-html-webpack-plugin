@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "target": "es5",
-    "module": "esnext",
+    "strict": false,
+    "target": "ES6",
+    "module": "CommonJS",
     "lib":[
-      "es6",
-      "dom"
+      "ES6"
     ],
     "allowJs": true,
     "checkJs": false,
@@ -13,12 +12,12 @@
     "noImplicitAny": false,
     "sourceMap": false,
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./lib",
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": "./lib",
     "moduleResolution": "node",
     "pretty": true,
-    "removeComments": true,
+    "removeComments": false,
     "downlevelIteration": true,
     "esModuleInterop": true
   },

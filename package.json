@@ -5,12 +5,10 @@
   "keywords": [
     "clean-before-html-webpack-plugin"
   ],
-  "browser": "dist/index.esm.js",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "dist"
+    "lib"
   ],
   "author": "lamovv<lamovv@gmail.com>",
   "license": "MIT",
@@ -20,6 +18,9 @@
   },
   "engines": {
     "node": ">=10.15.3"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",
@@ -35,7 +36,6 @@
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^18.0.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
-    "@rollup/plugin-replace": "^2.4.2",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.1.0",
@@ -47,7 +47,6 @@
     "css-loader": "^5.2.0",
     "eslint": "^7.23.0",
     "eslint-loader": "^4.0.2",
-    "html-webpack-plugin": "^5.3.1",
     "husky": "^6.0.0",
     "ip": "^1.1.5",
     "jest": "^26.6.3",
@@ -72,14 +71,12 @@
     "prepare": "husky install",
     "init": "npm run clean && rm -rf node_modules && yarn install -s --force && npm run prepare",
     "init:nolock": "npm run clean && rm -rf node_modules && yarn install -s --force --no-lockfile",
-    "updatev": "standard-version --release-as patch",
+    "updatev": "standard-version --release-as major",
     "updatev:beta": "standard-version --prerelease beta --skip.changelog --skip.tag",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist lib",
     "prettier": "prettier --write ./src",
-    "build": "run-p clean prettier test build:es build:types && rm ./dist/index.js",
-    "build:es": "rollup -c --silent",
-    "build:umd": "cross-env NODE_FORMAT=umd rollup -c --silent",
-    "build:all": "run-p build:umd build",
+    "build": "run-p clean prettier build:cjs build:types",
+    "build:cjs": "rollup -c --silent",
     "build:wpk": "cross-env NODE_ENV=production webpack --mode=production",
     "build:types": "tsc",
     "dev": "webpack serve --mode=development",

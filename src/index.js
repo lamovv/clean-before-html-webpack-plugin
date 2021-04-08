@@ -2,20 +2,36 @@
  * @author lamovv
  * @date 2021/04/08 10:57
  */
-'use strict';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-/**
- * Used for proxying regular HTTP(S) requests
- * @param {number} a - 参数A
- * @param {number} b - 参数B
- * @returns {number|boolean} ret
- */
-function compare(a, b) {
-  if (a === b) {
-    return 0;
-  } else {
-    return a > b;
+class CleanBeforeHtmlWebpackPlugin {
+  /**
+   * @param {*} options
+   */
+  constructor(options) {
+    this.options = options;
+  }
+  apply(compiler) {
+    compiler.hooks.compilation.tap('CleanBeforeHtmlWebpackPlugin', compilation => {
+      HtmlWebpackPlugin.getHooks(compilation).afterTemplateExecution.tapAsync('CleanBeforeHtmlWebpackPlugin', (data, cb) => {
+        try {
+          const { patterns = [] } = this.options;
+
+          if (patterns.length) {
+            let html = data.html;
+            patterns.forEach(v => {
+              html = html.replace(v.match, v.replacement);
+            });
+            data.html = html;
+          }
+
+          cb(null, data);
+        } catch (e) {
+          cb(e, data);
+        }
+      });
+    });
   }
 }
 
-export { compare };
+module.exports = CleanBeforeHtmlWebpackPlugin;

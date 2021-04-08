@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const pkg = require('./package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BeforeHtmlWebpackPlugin = require('./src/index');
 
 const isProd = process.env.NODE_ENV == 'production';
 
@@ -80,6 +81,12 @@ module.exports = {
       inject: 'body'
     })
   ].concat(isProd ? [
+    new BeforeHtmlWebpackPlugin({
+      patterns: [{
+        match: '<script src="../dist/demo/index.js"></script>',
+        replacement: ''
+      }]
+    }),
     new MiniCssExtractPlugin()
   ]: [
     new webpack.HotModuleReplacementPlugin(),
@@ -96,7 +103,7 @@ module.exports = {
     // host: `${ip.address()}`,
     host: '0.0.0.0',
     port,
-    openPage: `${prototol}//${ip.address()}${port == 80 ? '': `:${port}`}/dist/demo/index.html`,  // 同网段内，手机可直接访问无需代理
+    openPage: `${prototol}//${ip.address()}${port == 80 ? '': `:${port}`}`,  // 同网段内，手机可直接访问无需代理
     disableHostCheck: true,
     // 与 host: '0.0.0.0' 配合使用，在 disableHostCheck: true 未开启时，配置可访问服务的域名白名单
     // allowedHosts: [
@@ -134,8 +141,5 @@ module.exports = {
     // 若开发联调本地模块，可配置为['src', 'module', 'main']，并在本地模块的package.json增加"src":"src/index.js"配置
     mainFields: ['module', 'main'],
     // mainFields: ['src', 'module', 'main'],
-    alias: {
-      'clean-before-html-webpack-plugin': path.resolve('./src/index')
-    }
   }
 };
