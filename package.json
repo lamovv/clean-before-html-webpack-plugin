@@ -71,7 +71,7 @@
     "prepare": "husky install",
     "init": "npm run clean && rm -rf node_modules && yarn install -s --force && npm run prepare",
     "init:nolock": "npm run clean && rm -rf node_modules && yarn install -s --force --no-lockfile",
-    "updatev": "standard-version --release-as major",
+    "updatev": "standard-version --release-as patch",
     "updatev:beta": "standard-version --prerelease beta --skip.changelog --skip.tag",
     "clean": "rm -rf dist lib",
     "prettier": "prettier --write ./src",
