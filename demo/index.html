@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="lamovv"/>
+    <meta name="keywords" content="clean-before-html-webpack-plugin,demo,case"/>
+    <meta name="description" content="clean-before-html-webpack-plugin case"/>
+    <!-- 解决header referrer过长、防盗链问题，origin|never -->
+    <!-- <meta name="referrer" content="origin"/> -->
+    <title>Demo</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <script>
+    (function (d, w) {
+        var uiWidth = 7.5;  // 设计稿 750px;
+        var de = document.documentElement;
+        var e = 'orientationchange' in window ? 'orientationchange':'resize';
+    
+        function setRFS() {
+            var cw = de.clientWidth;
+            de.style.fontSize = cw/uiWidth +'px';
+        };
+        d.addEventListener && (w.addEventListener(e, setRFS, !1), d.addEventListener('DOMContentLoaded', setRFS, !1))
+    })(document, window);
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Case</h1>
+
+    <button data-action="compare">compare</button>
+    <button data-action="mock">mock</button>
+</div>
+<!-- <base href="http://localhost"> -->
+</body>
+</html>
